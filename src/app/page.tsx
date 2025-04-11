@@ -65,11 +65,11 @@ export default function Home() {
       <div className="grid grid-cols-2 h-[70vh] bg-amber-50 px-32">
         <div></div>
         <div className="my-auto flex flex-col gap-5">
-          <span className="mb-12">
-            Featured Modelling  <a className="hover:text-amber-800 ease-in-out duration-150" href='https://www.domesiconcepthouse.cz/en/' target="_blank">
+          {/* <span className="mb-12">
+            Featured Modelling  <a className="hover:text-amber-800 ease-in-out duration-200" href='https://www.domesiconcepthouse.cz/en/' target="_blank">
               domesiconcepthouse
             </a>
-          </span>
+          </span> */}
           <h1 className="text-6xl tracking-tight font-bold">
             The Scent of Wood
           </h1>
@@ -91,16 +91,16 @@ export default function Home() {
       <div className="p-32">
         <div className="grid grid-cols-6 grid-rows-6 gap-8">
           <div className="row-span-4 col-span-2 bg-amber-50">Image</div>
-          <div className="row-span-3 col-span-4 flex flex-col gap-2 items-start py-auto">
+          <div className="row-span-3 col-span-4 flex flex-col gap-5 items-start py-auto">
             <h1 className="text-3xl tracking-tight font-bold">
               Our Services
             </h1>
             <span>Expert designers are here to offer to remodel and organize the living environment of clients based on the needs of the clients.</span>
             <Button asChild variant="outline"><Link href='/'>Explore Remodeling</Link></Button>
           </div>
-          <div className="row-span-2 col-span-4 flex flex-col gap-2 col-start-1 items-end py-auto">
+          <div className="row-span-2 col-span-4 flex flex-col gap-5 col-start-1 items-end py-auto">
             <span>Increasing happiness by providing professional full-time maid, part-time maid and organizing helper/expert.</span>
-            <Button asChild variant="outline"><Link href='/'>Explore Housekeeping & Organization</Link></Button>
+            <Button asChild variant="outline"><Link href='/'>Explore Housekeeping & Organizing</Link></Button>
           </div>
           <div className="row-span-3 col-span-2 col-start-5 row-start-4 bg-blue-50">Image</div>
         </div>
@@ -129,8 +129,8 @@ export default function Home() {
           <CarouselContent className="w-1/3">
             {feedbacks.map((elem, index) => (
               <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
+                <div className="py-5 px-1">
+                  <Card className="hover:scale-105 duration-200">
                     <CardContent className="flex flex-col aspect-2/1 text-justify p-6">
                       <span className="text-sm text-slate-700 mb-5">{elem.content}</span>
                       <h1 className="text-lg font-bold">{elem.author}</h1>

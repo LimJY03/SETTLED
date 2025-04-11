@@ -34,10 +34,10 @@ export default function RootLayout({
                 <Link href="/">
                   <Image
                     className="dark:invert inline-block"
-                    src="/next.svg"
-                    alt="Next.js logo"
-                    width={70}
-                    height={20}
+                    src="/img/no_headline.png"
+                    alt="logo"
+                    width={100}
+                    height={10}
                     priority
                   />
                 </Link>
@@ -54,9 +54,9 @@ export default function RootLayout({
         <div className="px-32 py-12 flex flex-row gap-48 h-[30vh] bg-amber-50 justify-center">
           <Image
             className="dark:invert my-auto"
-            src="/next.svg"
+            src="/img/full.png"
             alt="Next.js logo"
-            width={130}
+            width={200}
             height={600}
             priority
           />
