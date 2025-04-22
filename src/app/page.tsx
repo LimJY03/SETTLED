@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -15,56 +17,35 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-
-const faq: { title: string; description: string }[] = [
-  {
-    title: 'Do you provide full-time or part-time domestic helper/maid?', 
-    description: 'We will provide full-time maids who live with the employers. However, part-time/temporary / live out maids are only available on case by case basis.'
-  },
-  {
-    title: 'Where do the maid come from? And what are their ethnics and religions?', 
-    description: 'The maids from our agency are mainly Indonesian of Central and East Java, Lombok and Nusa Tenggara origins. They are Muslims, Christians or Hindus being the three main religions in Indonesia.'
-  },
-  {
-    title: 'What are their ages?', 
-    description: 'In accordance to the immigration law, all domestic helpers must be between 21 to 45 years of age for the first year hiring.'
-  },
-  {
-    title: 'How long is the maid employment contract?', 
-    description: 'The maid employment contract is binding for a period of two years upon which the maid shall be returned to the home country for a short leave. The contract can be renewed if the maid agreed to return to the same employer otherwise the employer is advised to secure the services of a different maid.'
-  },
-]
-
-const feedbacks: { author: string; position: string; content: string; }[] = [
-  {
-    author: 'John Doe',
-    position: 'IT Manager at Google',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsa perspiciatis excepturi. Molestiae facere tempore numquam ullam veritatis omnis voluptate. Possimus laudantium, eius nisi officia facilis amet qui deserunt? Odit!'
-  },
-  {
-    author: 'John Doe',
-    position: 'IT Manager at Google',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsa perspiciatis excepturi. Molestiae facere tempore numquam ullam veritatis omnis voluptate. Possimus laudantium, eius nisi officia facilis amet qui deserunt? Odit!'
-  },
-  {
-    author: 'John Doe',
-    position: 'IT Manager at Google',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsa perspiciatis excepturi. Molestiae facere tempore numquam ullam veritatis omnis voluptate. Possimus laudantium, eius nisi officia facilis amet qui deserunt? Odit!'
-  },
-  {
-    author: 'John Doe',
-    position: 'IT Manager at Google',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam ipsa perspiciatis excepturi. Molestiae facere tempore numquam ullam veritatis omnis voluptate. Possimus laudantium, eius nisi officia facilis amet qui deserunt? Odit!'
-  },
-]
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+
+  const [faq, setFaq] = useState<{ title: string; description: string }[]>([]);
+  const [feedbacks, setFeedbacks] = useState<{ author: string; position: string; content: string; }[]>([]);
+
+  // Get FAQ
+  useEffect(() => {
+    fetch('/mockData/faq.json')
+      .then((res) => res.json())
+      .then((data) => setFaq(data))
+      .catch((err) => console.error('Failed to load FAQ data', err));
+  })
+  
+  // Get Reviews
+  useEffect(() => {
+    fetch('/mockData/reviews.json')
+      .then((res) => res.json())
+      .then((data) => setFeedbacks(data))
+      .catch((err) => console.error('Failed to load Feedback data', err));
+  })
+
   return (
     <>
       {/* Cover */}
-      <div className="grid grid-cols-2 h-[70vh] bg-amber-50 px-32">
+      <div className="grid grid-cols-2 h-[70vh] px-32 bg-cover bg-center bg-[linear-gradient(to_bottom,rgba(136,81,23,0.5),rgba(136,81,23,0.9)),url(/img/Uncategorized/pexels-max-vakhtbovych-6957083.jpg)]">
         <div></div>
-        <div className="my-auto flex flex-col gap-5">
+        <div className="my-auto flex flex-col gap-5 text-white">
           {/* <span className="mb-12">
             Featured Modelling  <a className="hover:text-amber-800 ease-in-out duration-200" href='https://www.domesiconcepthouse.cz/en/' target="_blank">
               domesiconcepthouse
@@ -90,22 +71,36 @@ export default function Home() {
       {/* Services */}
       <div className="p-32">
         <div className="grid grid-cols-6 grid-rows-6 gap-8">
-          <div className="row-span-4 col-span-2 bg-amber-50">Image</div>
-          <div className="row-span-3 col-span-4 flex flex-col gap-5 items-start py-auto">
+          <Image
+            alt='housekeeping'
+            src='/img/Uncategorized/pexels-max-vakhtbovych-6186848.jpg'
+            className="row-span-4 col-span-2 aspect-3/4 object-cover"
+            width={5000}
+            height={1000}
+            priority
+          />
+          <div className="row-span-3 col-span-4 flex flex-col gap-5 items-start justify-center h-full">
             <h1 className="text-3xl tracking-tight font-bold">
               Our Services
             </h1>
             <span>Expert designers are here to offer to remodel and organize the living environment of clients based on the needs of the clients.</span>
             <Button asChild variant="outline"><Link href='/'>Explore Remodeling</Link></Button>
           </div>
-          <div className="row-span-2 col-span-4 flex flex-col gap-5 col-start-1 items-end py-auto">
-            <span>Increasing happiness by providing professional full-time maid, part-time maid and organizing helper/expert.</span>
+          <div className="row-span-2 col-span-3 flex flex-col gap-5 col-start-1 items-end justify-center h-full">
+            <span className="text-end">Increasing happiness by providing professional full-time maid, part-time maid and organizing helper/expert.</span>
             <Button asChild variant="outline"><Link href='/'>Explore Housekeeping & Organizing</Link></Button>
           </div>
-          <div className="row-span-3 col-span-2 col-start-5 row-start-4 bg-blue-50">Image</div>
+          <Image
+            alt='housekeeping'
+            src='/img/Uncategorized/pexels-karolina-grabowska-4239032.jpg'
+            className="row-span-3 col-span-3 col-start-4 row-start-4 object-cover"
+            width={5000}
+            height={1000}
+            priority
+          />
         </div>
       </div>
-      <div className="grid grid-cols-2 p-32 bg-amber-50">
+      <div className="grid grid-cols-2 p-32 bg-[rgb(136,81,23)] text-white">
         <h1 className="text-3xl tracking-tight font-bold mt-8">
           Frequently Asked Questions
         </h1>
@@ -141,8 +136,8 @@ export default function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="cursor-pointer" />
+          <CarouselNext className="cursor-pointer" />
         </Carousel>
       </div>
     </>
